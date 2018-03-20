@@ -27,7 +27,7 @@
         <a class="navbar-brand" href="index.html"><img class="logo" src="images/svg/logo2.png"></a>
       </div>
       <ul class="collapse navbar-collapse nav navbar-nav" id="mainNavBar">
-        <li class="active"><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
+        <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
         <li><a href="register.html">Register Journal</a></li>
         <li><a href="about.html">About us</a></li>
       </ul>
@@ -42,49 +42,35 @@
   <div class="content">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <h1>Featured Journals</h1>
-          <hr>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2">
-          <a href="journal.html" class="featured-paper"><img src="images/DOJODOT.png" width="100%" class="img-thumbnail"></a>
-        </div>
-        <div class="col-md-2">
-          <a href="journal.html" class="featured-paper"><img src="images/DAJ.png" width="100%" class="img-thumbnail"></a>
-        </div>
-        <div class="col-md-2">
-          <a href="journal.html" class="featured-paper"><img src="images/AJAR.png" width="100%" class="img-thumbnail"></a>
-        </div>
-        <div class="col-md-2">
-          <a href="register.html" class="featured-paper"><img src="images/REg.png" width="100%" class="img-thumbnail"></a>
-        </div>
-        <div class="col-md-2">
-          <a href="register.html" class="featured-paper"><img src="images/REg.png" width="100%" class="img-thumbnail"></a>
-        </div>
-        <div class="col-md-2">
-          <a href="register.html" class="featured-paper"><img src="images/REg.png" width="100%" class="img-thumbnail"></a>
-        </div>
-      </div>
-      <hr style="border:transparent">
-      <div class="row">
-        <div class="col-md-12">
-          <h1>Filter by topic</h1>
-          <hr>
-          <a href="#">Blockchain</a>, <a href="#">Ethereum</a>, <a href="#">Distributed systems</a>, <a href="#">Peer to peer networks</a>, <a href="#">IPFS</a>...
-          <div class="" style="padding:5em;background:lightgray;">
-            <h2 style="text-align:center;">Do you have a journal?</h2>
-            <h2 style="text-align:center;"><a href="#">You can distribute it using Alexandria</a></h2>
-          </div>
-          <hr style="border:transparent">
-          <div class="row">
-            <div class="col-md-12">
-              <h1>How it works</h1>
-              <hr>
-              <img src="images/Alexandria_ethereum_schema.png" class="center-block" alt="">
+        <div class="col-md-12 center-block">
+          <h1>DOJôDOT - Submit a paper</h1>
+          <div class="" style="padding:3em 5em;background:lightgray;">
+            <div id="submission">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Title">
+              </div>
+              <div class="form-group">
+                <label for="title">Abstract</label>
+                <textarea class="form-control" rows="5"></textarea>
+              </div>
+              <div class="form-group" id="authors">
+                <label for="author1">Authors</label>
+                <input type="text" class="form-control" id="author1" placeholder="Author">
+              </div>
+              <button onclick="$( '#author1' ).clone().appendTo( '#authors' );" class="btn btn-default btn-xs pull-right">Add Author</button>
+              <div class="form-group">
+                <label for="exampleInputFile">File input</label>
+                <input type="file" id="exampleInputFile">
+              </div>
+              <div class="form-group">
+                <label for="title">Topics</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Topics separated by comma e.g. Blockchain, Ethereum, P2P">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
             </div>
           </div>
+          <a href="journal.html">Go back</a>
         </div>
       </div>
     </div>
