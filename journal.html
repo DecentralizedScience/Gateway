@@ -13,6 +13,17 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
+  <script type="text/javascript">
+      const node = new Ipfs({ repo: 'ipfs-' + Math.random() })
+      node.once('ready', () => {
+          console.log('Online status: ', node.isOnline() ? 'online' : 'offline')
+      document.getElementById("status").innerHTML= 'Node status: ' + (node.isOnline() ? 'online' : 'offline')
+      // You can write more code here to use it. Use methods like
+      // node.files.add, node.files.get. See the API docs here:
+      // https://github.com/ipfs/interface-ipfs-core
+      })
+  </script>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -43,13 +54,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1>DOJôDOT</h1>
+          <h1 id="journal-title"></h1>
         </div>
       </div>
       <div class="row">
         <div class="col-md-10">
-          <p>Text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <a href="#">Blockchain</a>, <a href="#">Ethereum</a>, <a href="#">Distributed systems</a>, <a href="#">Peer to peer networks</a>, <a href="#">IPFS</a>...
+          <p id="journal-desc"></p>
+          <p id="journal-tags"></p>
+          <p id="journal-address"></p>
           <hr>
           <h4>Lastest Papers</h4>
           <div class="list-group">
@@ -84,6 +96,14 @@
   <script type="text/javascript">
   $('.collapse').collapse({
     toggle: false
+  });
+
+  node.files.cat('QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY', function (err, data) {
+      if (err) {
+          return console.error('Error - ipfs files cat', err, res)
+      }
+
+      console.log(data.toString())
   });
   </script>
 </body>
