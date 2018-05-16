@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Alexandria - The library that cannot be burned</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- Latest compiled and minified CSS -->
+
+  <script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <!-- Optional theme -->
@@ -12,73 +14,184 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/style.css">
+
+
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="jQuery.tagify.min.js"></script>
+  <link rel="stylesheet" href="tagify.css" />
+  <script src="index.js"></script>
+  <script src="bs58.js"></script>
+  <script src="buffer.js"></script>
+  <script type="text/javascript">
+      const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
+      const decoder = new TextDecoder('utf-8');
+  </script>
 </head>
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNavBar" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html"><img class="logo" src="images/svg/logo2.png"></a>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNavBar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img class="logo" src="images/logo.jpg"></a>
+    </div>
+    <ul class="collapse navbar-collapse nav navbar-nav" id="mainNavBar">
+      <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
+      <li><a href="register.html">Register Journal</a></li>
+      <li><a href="about.html">About us</a></li>
+    </ul>
+    <form class="navbar-form navbar-collapse  navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Enter you search here">
       </div>
-      <ul class="collapse navbar-collapse nav navbar-nav" id="mainNavBar">
-        <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
-        <li><a href="register.html">Register Journal</a></li>
-        <li><a href="about.html">About us</a></li>
-      </ul>
-      <form class="navbar-form navbar-collapse  navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Enter you search here">
-        </div>
-        <button type="submit" class="btn btn-default">Search</button>
-      </form>
-    </div><!-- /.container-fluid -->
-  </nav>
-  <div class="content">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 center-block">
-          <h1>DOJôDOT - Submit a paper</h1>
-          <div class="" style="padding:3em 5em;background:lightgray;">
-            <div id="submission">
-              <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Title">
-              </div>
-              <div class="form-group">
-                <label for="title">Abstract</label>
-                <textarea class="form-control" rows="5"></textarea>
-              </div>
-              <div class="form-group" id="authors">
-                <label for="author1">Authors</label>
-                <input type="text" class="form-control" id="author1" placeholder="Author">
-              </div>
-              <button onclick="$( '#author1' ).clone().appendTo( '#authors' );" class="btn btn-default btn-xs pull-right">Add Author</button>
-              <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" id="exampleInputFile">
-              </div>
-              <div class="form-group">
-                <label for="title">Topics</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Topics separated by comma e.g. Blockchain, Ethereum, P2P">
-              </div>
-              <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default">Search</button>
+    </form>
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 center-block">
+        <h1>DOJôDOT - Submit a paper</h1>
+        <div class="" style="padding:3em 5em;background:lightgray;">
+          <div id="submission">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="papertitle" placeholder="Title">
             </div>
+            <div class="form-group">
+              <label for="title">Abstract</label>
+              <textarea class="form-control" rows="5" id="paperabstract"></textarea>
+            </div>
+            <div class="form-group" id="authors">
+              <label for="author1">Authors</label><br/>
+              <div id="to_clone" class="author_address">
+                <input type="text" class="form-control paperauthorname" class="author" placeholder="Author" style="width: 49%;float: left;">
+                <input type="text" class="form-control paperauthoraddr" class="address" placeholder="Address" style="width: 49%;float: left; margin-bottom: 10px">
+              </div>
+            </div>
+            <button onclick="$( '#to_clone' ).clone().appendTo( '#authors' );" class="btn btn-default btn-xs pull-right">Add Author</button>
+            <div class="form-group">
+              <label for="exampleInputFile">File input</label>
+              <input type="file" id="fileinput">
+            </div>
+            <div class="form-group">
+              <label for="title">Topics (From ACM Computer Classification System)</label>
+              <input name="tags" id="topics" class="form-control" placeholder="Topics separated by comma e.g. Blockchain, Ethereum, P2P" style="display: none">
+            </div>
+            <button id="submitpaper" class="btn btn-default">Submit</button>
           </div>
-          <a href="journal.html">Go back</a>
         </div>
+        <a href="journal.html">Go back</a>
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-  $('.collapse').collapse({
-    toggle: false
-  });
-  </script>
+</div>
+<script type="text/javascript">
+    $('.collapse').collapse({
+        toggle: false
+    });
+    var acmccs;
+    $.getJSON('./ACMCCS.json', function (data) {
+        acmccs = data;
+        var allowedTags =Object.keys(data);
+        $(document).ready(function() {
+            $("#topics").tagify({
+                enforceWhitelist    : true,
+                suggestionsMinChars : 3,
+                whitelist: allowedTags
+            }).on('add', function (data) {
+                console.log(data);
+            });
+        });
+    });
+
+    $('#submitpaper').on('click',function () {
+
+        if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+            alert('The File APIs are not fully supported in this browser.');
+            return;
+        }
+
+        input = document.getElementById('fileinput');
+        if (!input) {
+            alert("Um, couldn't find the fileinput element.");
+        }
+        else if (!input.files) {
+            alert("This browser doesn't seem to support the `files` property of file inputs.");
+        }
+        else if (!input.files[0]) {
+            alert("Please select a file before clicking 'Load'");
+        }
+        else {
+            file = input.files[0];
+            var reader = new FileReader();
+            var arrayBuffer;
+
+            reader.onload = function(e) {
+                arrayBuffer = reader.result;
+                var f = buffer.Buffer.from(arrayBuffer);
+                ipfs.add(f).then(function (data) {
+                    sendPaperInfo(data[0].hash);
+                });
+            }
+
+            reader.readAsArrayBuffer(file);
+        }
+
+        function sendPaperInfo(paperipfsaddress) {
+            var json = JSON.parse("{}");
+            json.title = $('#papertitle').val();
+            json.abstract = $('#paperabstract').val();
+            var authors = [];
+            $(".author_address").each(function () {
+                var author = $(this).find(".paperauthorname").first().val();
+                var address = $(this).find(".paperauthoraddr").first().val();
+                var temp = JSON.parse("{}");
+                temp.author = author;
+                temp.address = address;
+                authors.push(temp);
+            })
+            tags = [];
+            $("tag").each(function () {
+                var temp = JSON.parse("{}");
+                temp.name = $(this).attr('value');
+                temp.id = acmccs[temp.name];
+                tags.push(temp);
+            })
+            json.topics = tags;
+            json.authors = authors;
+            json.document = paperipfsaddress;
+            var buf = buffer.Buffer.from(JSON.stringify(json));
+            ipfs.add(buf).then(function (data) {
+                console.log(data);
+                res = ds_decode(data[0].hash);
+                console.log(res);
+                journal_contract.addpaper(res.hf,res.sz,"0x"+res.hash,
+                    {value: 0, gas: 300000, gasprice: 19},
+                    (err, res) => { console.log(err);console.log(res) });
+            });
+        }
+
+
+    });
+
+    url = new URL(window.location);
+    searchParams = new URLSearchParams(url.search);
+
+    var journal_bin;
+    var journal_contract;
+    $.getJSON('./journal_abi.json', function (abi) {
+        journal_bin = web3.eth.contract(abi);
+        journal_contract = journal_bin.at(searchParams.get('q'));
+    });
+
+
+</script>
 </body>
 </html>

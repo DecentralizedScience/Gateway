@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Alexandria - The library that cannot be burned</title>
+  <title>Decentralized Science</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -13,16 +13,13 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
+
+  <script src="buffer.js"></script>
+  <script src="index.js"></script>
+  <script src="bs58.js"></script>
   <script type="text/javascript">
-      const node = new Ipfs({ repo: 'ipfs-' + Math.random() })
-      node.once('ready', () => {
-          console.log('Online status: ', node.isOnline() ? 'online' : 'offline')
-      document.getElementById("status").innerHTML= 'Node status: ' + (node.isOnline() ? 'online' : 'offline')
-      // You can write more code here to use it. Use methods like
-      // node.files.add, node.files.get. See the API docs here:
-      // https://github.com/ipfs/interface-ipfs-core
-      })
+      const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
+      const decoder = new TextDecoder('utf-8');
   </script>
 </head>
 <body>
@@ -35,7 +32,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><img class="logo" src="images/svg/logo2.png"></a>
+        <a class="navbar-brand" href="index.html"><img class="logo" src="images/logo.jpg"></a>
       </div>
       <ul class="collapse navbar-collapse nav navbar-nav" id="mainNavBar">
         <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
@@ -64,46 +61,27 @@
           <p id="journal-address"></p>
           <hr>
           <h4>Lastest Papers</h4>
-          <div class="list-group">
-            <a href="paper.html" class="list-group-item">
-              <h4 class="list-group-item-heading">IPFS - Content Addressed, Versioned, P2P File System</h4>
-              <p class="list-group-item-text paper-author">Author: Juan Benet</p>
-              <p class="list-group-item-text paper-published">Publised on: DOJôDOT</p>
-              <p class="list-group-item-text paper-reviews">3 reviews - 1 accepted, 2 minor changes</p>
-            </a>
-            <a href="paper.html" class="list-group-item">
-              <h4 class="list-group-item-heading">IPFS to circumvent Internet Censorship</h4>
-              <p class="list-group-item-text paper-author">Authors: Antonio Tenorio-Fornés and David Llop-Vila</p>
-              <p class="list-group-item-text paper-published">Publised on: DOJôDOT</p>
-              <p class="list-group-item-text paper-reviews">3 reviews - 2 rejected, 1 major changes</p>
-            </a>
-            <a href="paper.html" class="list-group-item">
-              <h4 class="list-group-item-heading">DOJôDOT - The  first distributed journal</h4>
-              <p class="list-group-item-text paper-author">Author: Antonio Tenorio-Fornés and Viktor Jacynycz</p>
-              <p class="list-group-item-text paper-published">Publised on: DOJôDOT</p>
-              <p class="list-group-item-text paper-reviews">1 reviews - 1 accepted</p>
-            </a>
+          <div class="list-group" id="latest-papers">
           </div>
         </div>
         <div class="col-md-2">
-          <img src="images/DOJODOT.png" width="100%">
+          <img id="journal-img" width="100%">
           <h3 style="text-align:center"><small>Average review time:</small><br>2.2 months</h3>
-          <a href="submit.html" class="btn btn-xs" style="width:100%">Submit your paper</a>
+          <a href="submit.html" class="btn btn-xs" id="submitpaper" style="width:100%">Submit your paper</a>
         </div>
       </div>
     </div>
   </div>
+  <script>
+      var ipfsadd = "";
+      var isMetamaskUnlocked = false;
+  </script>
+  <script src="metamask_checker.js"></script>
+  <script src="journal_ethereum.js"></script>
+  <script src="journal_ipfs.js"></script>
   <script type="text/javascript">
   $('.collapse').collapse({
     toggle: false
-  });
-
-  node.files.cat('QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY', function (err, data) {
-      if (err) {
-          return console.error('Error - ipfs files cat', err, res)
-      }
-
-      console.log(data.toString())
   });
   </script>
 </body>

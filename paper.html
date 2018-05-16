@@ -13,6 +13,16 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
+
+  <script src="index.js"></script>
+  <script src="bs58.js"></script>
+  <script src="buffer.js"></script>
+
+  <script type="text/javascript">
+      const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
+      const decoder = new TextDecoder('utf-8');
+  </script>
+
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -24,7 +34,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><img class="logo" src="images/svg/logo2.png"></a>
+        <a class="navbar-brand" href="index.html"><img class="logo" src="images/logo.jpg"></a>
       </div>
       <ul class="collapse navbar-collapse nav navbar-nav" id="mainNavBar">
         <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
@@ -43,18 +53,17 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>IPFS - Content Addressed, Versioned, P2P File System</h2>
+          <h2 id="title"></h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-10">
-          <p>Author: <a href="author.html">Juan benet</a> - Published on: <a href="journal.html">DOJôDOT</a></p>
-          <p>Topics <a href="#">Peer to peer networks</a>, <a href="#">IPFS</a></p>
+          <p id="authors"></p>
+            <p>Submitted to: <span id="journal"></span></p>
+          <p id="topics"></p>
           <hr>
           <h4>Abstract</h4>
-          <p style="line-height:1.2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum bibendum rhoncus tincidunt. Donec a cursus elit. Donec sed ante eget nibh fermentum auctor. Sed a tempor elit. Phasellus mollis lacus eu quam bibendum, eu pretium velit ultrices. Proin tristique sapien eget ipsum consectetur, a consequat leo fermentum. Pellentesque pellentesque ultrices vestibulum. Vivamus vitae tincidunt massa. Phasellus accumsan augue posuere dictum congue. Curabitur pellentesque lobortis justo, a lobortis orci sagittis egestas.
-
-Etiam imperdiet lectus quis sollicitudin facilisis. Aenean aliquet dui ac facilisis laoreet. Etiam sed libero vitae enim sodales vulputate sed viverra felis. Integer fringilla tellus dui, ut laoreet velit fermentum pellentesque. Nullam id pellentesque orci. Maecenas ipsum tellus, commodo faucibus ligula ac, commodo ultrices elit. Nam consequat arcu dictum erat fermentum varius. Aliquam ullamcorper ante vel dui cursus, sit amet iaculis nisi convallis.</p>
+          <p style="line-height:1.2" id="abstract"></p>
         </div>
         <div class="col-md-2">
           <p>Actual: <b>Draft 3</b></p>
@@ -73,6 +82,84 @@ Etiam imperdiet lectus quis sollicitudin facilisis. Aenean aliquet dui ac facili
   $('.collapse').collapse({
     toggle: false
   });
+
+  $('#submitpaper').on('click',function () {
+
+      if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+          alert('The File APIs are not fully supported in this browser.');
+          return;
+      }
+
+      input = document.getElementById('fileinput');
+      if (!input) {
+          alert("Um, couldn't find the fileinput element.");
+      }
+      else if (!input.files) {
+          alert("This browser doesn't seem to support the `files` property of file inputs.");
+      }
+      else if (!input.files[0]) {
+          alert("Please select a file before clicking 'Load'");
+      }
+      else {
+
+      }
+  });
+
+  url = new URL(window.location);
+  searchParams = new URLSearchParams(url.search);
+
+  var paper_bin;
+  var paper_contract;
+  $.getJSON('./paper_abi.json', function (abi) {
+      paper_bin = web3.eth.contract(abi);
+      paper_contract = paper_bin.at(searchParams.get('q'));
+      PaperCreated_events = paper_contract.PaperCreated({}, {fromBlock: 0, toBlock: 'latest'});
+      PaperCreated_events.get((error, logs) => {
+          console.log(logs);
+      logs.forEach(
+          function (element) {
+              var hf = element.args["hf"].c[0];
+              var sz = element.args["sz"].c[0];
+              var data = element.args["data"];
+              var journal = element.args["journal"];
+              ipfs.cat(ds_encode(hf,sz,data)).then(
+                  function (file) {
+                      var raw = file.read();
+                      var json = decoder.decode(raw);
+                      var info = JSON.parse(json);
+                      //console.log(JSON.stringify(info,null,2));
+                      var title= info.title;
+                      var topics_arr = info.topics;
+                      var topics = "Topics: ";
+                      topics_arr.forEach(
+                          function (topic) {
+                              topics+='<a href="topic.html?q='+topic.id+'">'+topic.name+'</a>, ';
+                          }
+                      );
+
+                      topics = topics.substr(0,topics.length-2);
+
+                      var authors_arr = info.authors;
+                      var authors = "Authors: ";
+
+                      authors_arr.forEach(
+                          function (author) {
+                              authors+='<a href="author.html?q='+author.address+'">'+author.author+'</a>, ';
+                          }
+                      );
+                      authors = authors.substr(0,authors.length-2);
+                      $("#title").html(title);
+                      $("#authors").html(authors);
+                      $("#topics").html(topics);
+                      $("#abstract").html(info.abstract);
+                      $("#journal").html('<a href="journal.html?q='+journal+
+                      '">'+journal+"</a>");
+                  }
+              );
+          });
+      });
+  });
+
   </script>
 </body>
 </html>

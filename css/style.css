@@ -29,3 +29,6 @@ a.btn.btn-xs {background: lightgray;color: black;text-decoration: none;transitio
 a.btn.btn-xs:hover {background: #1E365E;color: white;text-decoration: none;box-shadow: 0 1px 10px black;}
 a.list-group-item{text-decoration: none !important}
 p.list-group-item-text {line-height: 1.4;}
+tags.form-control{min-height: 5em;}
+tags tag > div > span {font-size: 13px !important;
+    line-height: 1.6 !important;}

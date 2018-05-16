@@ -1,0 +1,110 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "d",
+        "type": "bytes32"
+      }
+    ],
+    "name": "setData",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_hf",
+        "type": "uint8"
+      },
+      {
+        "name": "_sz",
+        "type": "uint8"
+      },
+      {
+        "name": "_data",
+        "type": "bytes32"
+      }
+    ],
+    "name": "submitDraft",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "_hf",
+        "type": "uint8"
+      },
+      {
+        "name": "_sz",
+        "type": "uint8"
+      },
+      {
+        "name": "_data",
+        "type": "bytes32"
+      },
+      {
+        "name": "_sender",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hf",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "name": "sz",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "name": "data",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "journal",
+        "type": "address"
+      }
+    ],
+    "name": "PaperCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hf",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "name": "sz",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "name": "data",
+        "type": "bytes32"
+      }
+    ],
+    "name": "NewDraft",
+    "type": "event"
+  }
+]
