@@ -1,0 +1,29 @@
+{
+  "title": "A Decentralized Publication System for Open Science using Blockchain an ipfs",
+  "authors": [
+    {
+      "name": "Antonio tenorio",
+      "address": "0xbB49cd914B515B2050080440b9B7Ee86DBfD22cC"
+    },
+    {
+      "name": "Viktor Jacynycz",
+      "address": "0xDcD2743BE29Ba2EB95A35530EA309cbc2677aAd6"
+    }
+  ],
+  "abstract": "Science publication and peer review raises concerns about fairness, quality, performance, cost or accuracy. The Open Access movements has been unable to fulfill all its promises, and middlemen publishers can still impose policies and concentrate profits. This paper, using emerging distributed technologies such as Blockchain and IPFS, proposes a decentralized publication system for open science. It provides transparent governance, a distributed reviewer reputation system, and open access by-design. The paper concludes reviewing the open challenges of such approach",
+  "topics": [
+    {
+      "id": "1",
+      "name": "Peer to peer networks"
+    },
+    {
+      "id": "2",
+      "name": "IPFS"
+    },
+    {
+      "id": "3",
+      "name": "Distributed File systems"
+    }
+  ],
+    "ipfsaddr":"QmSUCgFzy4rNbWy9eX1h5atQGxADC5aER5oUySHpgEcQex"
+}

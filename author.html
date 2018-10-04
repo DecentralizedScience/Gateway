@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Decentralized Science</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="buffer.js"></script>
+  <script src="index.js"></script>
+  <script src="bs58.js"></script>
+  <script type="text/javascript">
+      const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
+      const decoder = new TextDecoder('utf-8');
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNavBar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img class="logo" src="images/logo.jpg"></a>
+      </div>
+      <ul class="collapse navbar-collapse nav navbar-nav" id="mainNavBar">
+        <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
+        <li><a href="register.html">Register Journal</a></li>
+        <li><a href="about.html">About us</a></li>
+      </ul>
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <img src="images/viktor.jpg" width="100%" class="img-thumbnail" style="margin-top:1.7em;">
+        </div>
+        <div class="col-md-10">
+          <h2>Viktor Jacynycz</h2>
+          <b>0xdd870fa1b7c4700f2bd7f44238821c26f7392148</b>
+          <p class="reviews">Published on: <a href="topic.html">DOJöDOT (2)</a></p>
+          <p class="rating">Rating: ★★★★★ - Score: 1 - Reviews on time: <b>100%</b></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Authored Papers</h3> 
+          <div class="list-group">
+              <a href="paper.html" class="list-group-item">
+                  <h4 class="list-group-item-heading">DOJôDOT - The  first distributed journal</h4>
+                  <p class="list-group-item-text paper-author">Author: Antonio Tenorio-Fornés and 
+                      Viktor Jacynycz</p>
+                  <p class="list-group-item-text paper-published">Publised on: DOJôDOT</p>
+                  <p class="list-group-item-text paper-reviews">3 reviews - 1 accept, 2 strong accept</p>
+              </a>
+            <a href="paper.html" class="list-group-item">
+                <h4 class="list-group-item-heading">Space - Secure Payments Contracts in Ethereum</h4>
+                <p class="list-group-item-text paper-author">Author: Viktor Jacynycz</p>
+                <p class="list-group-item-text paper-published">Sumbitted to: DOJôDOT</p>
+                <p class="list-group-item-text paper-reviews">Review pending</p>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3>Reviews on other papers</h3>
+          <div class="list-group">
+              <a href="paper.html" class="list-group-item">
+                  <h4 class="list-group-item-heading">IPFS - Content Addressed, Versioned, P2P File 
+                      System</h4>
+                  <p class="list-group-item-text paper-author">Author: Juan Benet</p>
+                  <p class="list-group-item-text paper-published">Publised on: DOJôDOT</p>
+                  <p class="list-group-item-text paper-reviews">3 reviews - 1 accept, 2 weak accept</p>
+              </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  $('.collapse').collapse({
+    toggle: false
+  });
+  </script>
+
+
+</body></html>

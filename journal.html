@@ -14,13 +14,18 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
 
-  <script src="buffer.js"></script>
-  <script src="index.js"></script>
-  <script src="bs58.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+
+  <script src="js/utils/buffer.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/utils/bs58.js"></script>
+
   <script type="text/javascript">
-      const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
-      const decoder = new TextDecoder('utf-8');
+   const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
+   const decoder = new TextDecoder('utf-8');
   </script>
+  <script src="js/platform/metamask_checker.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -76,13 +81,16 @@
       var ipfsadd = "";
       var isMetamaskUnlocked = false;
   </script>
-  <script src="metamask_checker.js"></script>
-  <script src="journal_ethereum.js"></script>
-  <script src="journal_ipfs.js"></script>
+
+
+  <script src="js/platform/journal_ethereum.js"></script>
+  <script src="js/platform/journal_ipfs.js"></script>
+
   <script type="text/javascript">
   $('.collapse').collapse({
     toggle: false
   });
   </script>
+
 </body>
 </html>

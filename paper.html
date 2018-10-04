@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +15,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
 
-  <script src="index.js"></script>
-  <script src="bs58.js"></script>
-  <script src="buffer.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/utils/bs58.js"></script>
+  <script src="js/utils/buffer.js"></script>
 
   <script type="text/javascript">
       const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
@@ -57,7 +58,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-10">
+          <div class="col-md-10">
+          <p id="ipfsaddr"></p>
           <p id="authors"></p>
             <p>Submitted to: <span id="journal"></span></p>
           <p id="topics"></p>
@@ -79,86 +81,103 @@
     </div>
   </div>
   <script type="text/javascript">
-  $('.collapse').collapse({
-    toggle: false
-  });
+   $('.collapse').collapse({
+       toggle: false
+   });
 
-  $('#submitpaper').on('click',function () {
+   $('#submitpaper').on('click',function () {
 
-      if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
-          alert('The File APIs are not fully supported in this browser.');
-          return;
-      }
+       if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
+           alert('The File APIs are not fully supported in this browser.');
+           return;
+       }
 
-      input = document.getElementById('fileinput');
-      if (!input) {
-          alert("Um, couldn't find the fileinput element.");
-      }
-      else if (!input.files) {
-          alert("This browser doesn't seem to support the `files` property of file inputs.");
-      }
-      else if (!input.files[0]) {
-          alert("Please select a file before clicking 'Load'");
-      }
-      else {
+       input = document.getElementById('fileinput');
+       if (!input) {
+           alert("Um, couldn't find the fileinput element.");
+       }
+       else if (!input.files) {
+           alert("This browser doesn't seem to support the `files` property of file inputs.");
+       }
+       else if (!input.files[0]) {
+           alert("Please select a file before clicking 'Load'");
+       }
+       else {
 
-      }
-  });
+       }
+   });
 
-  url = new URL(window.location);
-  searchParams = new URLSearchParams(url.search);
+   url = new URL(window.location);
+   searchParams = new URLSearchParams(url.search);
 
-  var paper_bin;
-  var paper_contract;
-  $.getJSON('./paper_abi.json', function (abi) {
-      paper_bin = web3.eth.contract(abi);
-      paper_contract = paper_bin.at(searchParams.get('q'));
-      PaperCreated_events = paper_contract.PaperCreated({}, {fromBlock: 0, toBlock: 'latest'});
-      PaperCreated_events.get((error, logs) => {
-          console.log(logs);
-      logs.forEach(
-          function (element) {
-              var hf = element.args["hf"].c[0];
-              var sz = element.args["sz"].c[0];
-              var data = element.args["data"];
-              var journal = element.args["journal"];
-              ipfs.cat(ds_encode(hf,sz,data)).then(
-                  function (file) {
-                      var raw = file.read();
-                      var json = decoder.decode(raw);
-                      var info = JSON.parse(json);
-                      //console.log(JSON.stringify(info,null,2));
-                      var title= info.title;
-                      var topics_arr = info.topics;
-                      var topics = "Topics: ";
-                      topics_arr.forEach(
-                          function (topic) {
-                              topics+='<a href="topic.html?q='+topic.id+'">'+topic.name+'</a>, ';
-                          }
-                      );
+   var paper_bin;
+   var paper_contract;
+   var res;
+   $.getJSON('abi/paper_abi.json', function (abi) {
+       paper_bin = web3.eth.contract(abi);
+       paper_contract = paper_bin.at(searchParams.get('q'));
+       PaperCreated_events = paper_contract.PaperCreated({}, {fromBlock: 0, toBlock: 'latest'});
+       PaperCreated_events.get((error, logs) => {
+           console.log(logs);
+           logs.forEach(
+               function (element) {
+                   var hf = element.args["hf"].c[0];
+                   var sz = element.args["sz"].c[0];
+                   var data = element.args["data"];
+                   var journal = element.args["journal"];
+                   ipfs.cat(ds_encode(hf,sz,data)).then(
+                       function (file) {
+                           var raw = file.read();
+                           var json = decoder.decode(raw);
+                           var info = JSON.parse(json);
+                           //console.log(JSON.stringify(info,null,2));
+                           var title= info.title;
+                           var topics_arr = info.topics;
+                           var topics = "Topics: ";
+                           var ipfsaddr= "IPFS address: " + info.ipfsaddr;
+                           topics_arr.forEach(
+                               function (topic) {
+                                   topics+='<a href="topic.html?q='+topic.id+'">'+topic.name+'</a>, ';
+                               }
+                           );
 
-                      topics = topics.substr(0,topics.length-2);
+                           topics = topics.substr(0,topics.length-2);
 
-                      var authors_arr = info.authors;
-                      var authors = "Authors: ";
+                           var authors_arr = info.authors;
+                           var authors = "Authors: ";
 
-                      authors_arr.forEach(
-                          function (author) {
-                              authors+='<a href="author.html?q='+author.address+'">'+author.author+'</a>, ';
-                          }
-                      );
-                      authors = authors.substr(0,authors.length-2);
-                      $("#title").html(title);
-                      $("#authors").html(authors);
-                      $("#topics").html(topics);
-                      $("#abstract").html(info.abstract);
-                      $("#journal").html('<a href="journal.html?q='+journal+
-                      '">'+journal+"</a>");
-                  }
-              );
-          });
-      });
-  });
+                           authors_arr.forEach(
+                               function (author) {
+                                   authors+='<a href="author.html?q='+author.address+'">'+author.name+'</a>, ';
+                               }
+                           );
+                           authors = authors.substr(0,authors.length-2);
+                           $("#title").html(title);
+                           $("#authors").html(authors);
+                           $("#topics").html(topics);
+                           $("#ipfsaddr").html(ipfsaddr);
+                           $("#abstract").html(info.abstract);
+                           $("#journal").html('<a href="journal.html?q='+journal+
+                                              '">'+journal+"</a>");
+                           $("#ipfsaddr").on('click',function(){
+                               ipfs.get(info.ipfsaddr).then(
+                                   function (data) {
+                                       console.log(typeof(data));
+                                       console.log(data);
+                                       //res = data;
+                                       data.read().then(({ done, value }) => {
+                                                 var arr = [];
+                                                 arr.push(value);
+                                                 var pdf = new File(arr, 'test.pdf', {type: 'application/pdf'});
+                                             })
+                                   });
+                               
+                           });
+                       }
+                   );
+               });
+       });
+   });
 
   </script>
 </body>

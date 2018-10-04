@@ -1,0 +1,279 @@
+[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "papers",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "multiHashFunction",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashSize",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashAddress",
+				"type": "bytes32"
+			},
+			{
+				"name": "_authors",
+				"type": "address[]"
+			}
+		],
+		"name": "submitPaper",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "target",
+				"type": "address"
+			},
+			{
+				"name": "level",
+				"type": "uint8"
+			}
+		],
+		"name": "setEditorPrivileges",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "multiHashFunction",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashSize",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashAddress",
+				"type": "bytes32"
+			}
+		],
+		"name": "setNewAddress",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "editors",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "ipfsJournalAddress",
+		"outputs": [
+			{
+				"name": "multiHashFunction",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashSize",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashAddress",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "reviewer",
+				"type": "address"
+			},
+			{
+				"name": "paperAddress",
+				"type": "address"
+			}
+		],
+		"name": "assignReviewer",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "setNewOwner",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "multiHashFunction",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashSize",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashAddress",
+				"type": "bytes32"
+			},
+			{
+				"name": "ct",
+				"type": "uint256"
+			},
+			{
+				"name": "rt",
+				"type": "uint256"
+			},
+			{
+				"name": "_rephub",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "multiHashFunction",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"name": "multiHashSize",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"name": "multiHashAddress",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "confirmTime",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "reviewTime",
+				"type": "uint256"
+			}
+		],
+		"name": "JournalAddress",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "multiHashFunction",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"name": "multiHashSize",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"name": "multiHashAddress",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "add",
+				"type": "address"
+			}
+		],
+		"name": "PaperSubmitted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "journalOwner",
+				"type": "address"
+			}
+		],
+		"name": "NewOwner",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "target",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "level",
+				"type": "uint8"
+			}
+		],
+		"name": "PrivilegeChange",
+		"type": "event"
+	}
+]
