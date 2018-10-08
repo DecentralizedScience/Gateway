@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Decentralized Science</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <title>Decentralized Science</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/style.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css">
 
-        <script src="buffer.js"></script>
-        <script src="index.js"></script>
-        <script src="bs58.js"></script>
-        <script type="text/javascript">
-         const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
-         const decoder = new TextDecoder('utf-8');
-        </script>
-    </head>
-    <body>
-        <nav class="navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNavBar" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"><img class="logo" src="images/logo.jpg"></a>
-                </div>
-                <ul class="collapse navbar-collapse nav navbar-nav" id="mainNavBar">
-                    <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
-                    <li><a href="register.html">Register Journal</a></li>
-                    <li><a href="about.html">About us</a></li>
-                </ul>
-            </div><!-- /.container-fluid -->
-        </nav>
+
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+
+  <script src="js/utils/buffer.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/utils/bs58.js"></script>
+
+  <script type="text/javascript">
+   const ipfs = window.IpfsApi('127.0.0.1','5001',{protocol: 'http'});
+   const decoder = new TextDecoder('utf-8');
+  </script>
+  <script src="js/platform/metamask_checker.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNavBar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img class="logo" src="images/logo.jpg"></a>
+      </div>
+      <ul class="collapse navbar-collapse nav navbar-nav" id="mainNavBar">
+        <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
+        <li><a href="register.html">Register Journal</a></li>
+        <li><a href="about.html">About us</a></li>
+      </ul>
+      <form class="navbar-form navbar-collapse  navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Enter you search here">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form>
+    </div><!-- /.container-fluid -->
+  </nav>
   <div class="content">
     <div class="container">
       <div class="row">
@@ -49,6 +60,10 @@
           <hr>
         </div>
       </div>
+
+
+      <script src="js/deploy/contractDeployment.js"></script>
+
       <div class="row">
         <div class="col-md-2">
           <a href="journal.html" class="featured-paper"><img src="images/DOJODOT.png" width="100%" class="img-thumbnail"></a>
@@ -72,26 +87,35 @@
       <hr style="border:transparent">
       <div class="row">
         <div class="col-md-12">
-          <div class="" style="padding:5em;background:lightgray;">
-            <h2 style="text-align:center;">Do you have a journal?</h2>
-            <h2 style="text-align:center;"><a href="#">You can distribute it using Alexandria</a></h2>
-          </div>
-          <hr style="border:transparent">
-          <div class="row">
-            <div class="col-md-12">
-              <h1>How it works</h1>
-              <hr>
-              <img src="images/Alexandria_ethereum_schema.png" class="center-block" alt="">
-            </div>
-          </div>
+          <button id="createRephub">Create Reputation Hub</button>
+          <span id="rephubaddr">Not set</span>
         </div>
+
+        <div class="col-md-12">
+          <button id="createJournal">Create Journal</button>
+          <span id="journaladdr">Not set</span>
+        </div>
+
       </div>
     </div>
   </div>
   <script type="text/javascript">
+  var rephubaddr = "";
   $('.collapse').collapse({
     toggle: false
   });
+
+  $('#createRephub').on('click',function(){
+    $('#rephubaddr').html('Creating contract...');
+    createRephub($('#rephubaddr'));
+  });
+
+  $('#createJournal').on('click',function(){
+    rephubaddress = $('#rephubaddr').html();
+    $('#journaladdr').html('Creating contract...');
+    createJournal(12,20,"0x8B560E826E70FC0AFE6C2B1688A1E9A6D3ECF19AF5A9DF92B58B96267738D50A",0,0,rephubaddress,$('#journaladdr'));
+  });
+
   </script>
 </body>
 </html>

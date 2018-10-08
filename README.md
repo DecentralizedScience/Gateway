@@ -21,7 +21,7 @@ Initialize IPFS local repository
 ipfs init
 ```
 
-Launch IPFS daemon 
+Launch IPFS daemon
 ```bash
 ipfs daemon
 ```
@@ -47,12 +47,25 @@ Once deployed, create a journal and get the Ethereum address
 
 The platform now can be accessed via ```http://127.0.0.1/jourmal?q=<paste_address_here>```
 
+### 5. Launch a test Ethreum network with Ganache-cli (optional).
+
+If you want to run the platform in a local test network instead of the ones provided by Ethereum you must install ```ganache-cli```. Make sure you have Node.js (>= v6.11.5) installed.
+
+```
+npm install -g ganache-cli
+```
+Once installed get your Ethereum's account private key through Metamask options. Then launch ganache-cli with the command:
+
+```
+ganache-cli --account="0x<your-private-key>,100000000000000000000"
+```
+___
 ## Files
 
  ```contracts``` contains the smart contacts file. In order to run the platform, the contract must be deployed in Ethereum.
 
  ```abi``` contains the contrat ABI's to connect JavaScript with Ethereum.
- 
+
 ```js``` contains JavaScript files.
 
 ```testjson``` contains some JSON files to test the platform's behaviour.

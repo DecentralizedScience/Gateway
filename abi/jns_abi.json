@@ -1,0 +1,61 @@
+[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "multiHashFunction",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashSize",
+				"type": "uint8"
+			},
+			{
+				"name": "multiHashAddress",
+				"type": "bytes32"
+			},
+			{
+				"name": "journalAddress",
+				"type": "address"
+			}
+		],
+		"name": "register",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "multiHashFunction",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"name": "multiHashSize",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"name": "multiHashAddress",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "journalAddress",
+				"type": "address"
+			}
+		],
+		"name": "NewJournal",
+		"type": "event"
+	}
+]
