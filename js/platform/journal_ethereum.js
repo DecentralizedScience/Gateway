@@ -44,4 +44,10 @@ PaperSubmitted_events.get((error, logs) => {
     getLastPapers(ipfsPapersAdresses);
 });
 
-
+function addTestPaper(){
+  var authors = [];
+  authors.push("0xdcd2743be29ba2eb95a35530ea309cbc2677aad6");
+  journal_contract.submitPaper(12,20,'0x74335790E8D0DDCB56E33D6E23A620E2C90FB1777F116EC1B6DBD92C5D52B584',authors,
+  {value: 0, gas: 300000, gasprice: 19},
+  (err, res) => { console.log(err);console.log(res) });
+}

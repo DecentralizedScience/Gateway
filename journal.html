@@ -73,6 +73,8 @@
           <img id="journal-img" width="100%">
           <h3 style="text-align:center"><small>Average review time:</small><br>2.2 months</h3>
           <a href="submit.html" class="btn btn-xs" id="submitpaper" style="width:100%">Submit your paper</a>
+          <br>
+          <a  class="btn btn-xs" id="submittestpaper" style="width:100%">Submit test paper</a>
         </div>
       </div>
     </div>
@@ -90,7 +92,10 @@
   $('.collapse').collapse({
     toggle: false
   });
-  </script>
+  $('#submittestpaper').on('click',function(){
+    addTestPaper();
+  });
+</script>
 
 </body>
 </html>

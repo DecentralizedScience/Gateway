@@ -69,7 +69,7 @@
         </div>
         <div class="col-md-2">
           <p>Actual: <b>Draft 3</b></p>
-          <a href="#" class="btn btn-xs" style="width:100%">Download paper</a>
+          <a href="http://localhost:8080/ipfs/QmSUCgFzy4rNbWy9eX1h5atQGxADC5aER5oUySHpgEcQex" download target="_blank" class="btn btn-xs" style="width:100%">Download paper</a>
           <hr>
           <p>
             Previous drafts:<br>
@@ -160,18 +160,7 @@
                            $("#journal").html('<a href="journal.html?q='+journal+
                                               '">'+journal+"</a>");
                            $("#ipfsaddr").on('click',function(){
-                               ipfs.get(info.ipfsaddr).then(
-                                   function (data) {
-                                       console.log(typeof(data));
-                                       console.log(data);
-                                       //res = data;
-                                       data.read().then(({ done, value }) => {
-                                                 var arr = [];
-                                                 arr.push(value);
-                                                 var pdf = new File(arr, 'test.pdf', {type: 'application/pdf'});
-                                             })
-                                   });
-                               
+
                            });
                        }
                    );

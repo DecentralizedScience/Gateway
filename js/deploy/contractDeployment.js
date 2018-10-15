@@ -57,7 +57,7 @@ function createJournal(multiHashFunction,multiHashSize,multiHashAddress,ct,rt,_r
       console.log(e, contract);
       if (typeof contract.address !== 'undefined') {
            console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
-           element.html(contract.address);
+           element.html('<a href="journal.html?q='+contract.address+'">View journal at:'+ contract.address+ '</a>');
       }
    });
    return journal;
