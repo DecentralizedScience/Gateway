@@ -38,12 +38,28 @@ You can install Metamask extension ```https://metamask.io/``` or a web browser l
 In order to run the IPFS gateway, you must launch a local server in your machine.
 
 ```bash
-python server.py
+python3 server.py
 ```
 
-### 4. Deploy the smart contract in Ethereum
+### 4. Deploy the smart contracts in Ethereum
 
-Once deployed, create a journal and get the Ethereum address
+To test this project, install ganache client:
+
+``` bash
+npm install -g ganache-cli
+```
+
+and launch it
+
+``` bash
+ganache-cli
+```
+
+Then you can visit the home page of the prototype at http://localhost:8081
+
+There, you can deploy the reputation hub.
+
+Then you can create a journal and get the Ethereum address.
 
 The platform now can be accessed via ```http://127.0.0.1/jourmal?q=<paste_address_here>```
 
